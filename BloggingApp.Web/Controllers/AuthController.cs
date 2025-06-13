@@ -54,6 +54,7 @@ namespace BloggingApp.Web.Controllers
 
                 var principal = new ClaimsPrincipal(identity);
                 principal.SetScopes(request.GetScopes());
+                principal.SetResources("resource_server");
                 return SignIn(principal, OpenIddictServerAspNetCoreDefaults.AuthenticationScheme);
                 // return BadRequest(new { error = "invalid_grant", error_description = "The specified grant type is not supported." });
             }

@@ -55,22 +55,31 @@ builder.Services.AddOpenIddict()
         // options.SetIssuer(new Uri("https://localhost:5001/"));
         // options.SetSigningKey(new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("your-very-secure-signing-key")));
 
-        // options.AddDevelopmentEncryptionCertificate()
-        //        .AddDevelopmentSigningCertificate();
+
+        // Only for development
+        options.AddDevelopmentEncryptionCertificate()
+               .AddDevelopmentSigningCertificate();
+
+        // for production, you would typically use a real certificate
+        // .AddEncryptionCertificate("path-to-cert.pfx", "password")
+        //.AddSigningCertificate("path-to-cert.pfx", "password")
     })
     .AddValidation((options) =>
     {
         options.UseLocalServer();
         options.UseAspNetCore();
+
         // options.UseReferenceAccessTokens();
         // options.UseReferenceRefreshTokens();
     });
 
-builder.Services.AddAuthentication()
-    .AddIdentityCookies();
+// builder.Services.AddAuthentication()
+//     .AddIdentityCookies();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -84,7 +93,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-
+app.MapRazorPages();
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -95,5 +104,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
-
+ 
 app.Run();
