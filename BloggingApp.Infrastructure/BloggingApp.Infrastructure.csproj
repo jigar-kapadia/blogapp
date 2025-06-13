@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\BloggingApp.Application\BloggingApp.Application.csproj" />
+    <ProjectReference Include="..\BloggingApp.Persistence\BloggingApp.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OpenIddict" Version="5.2.0" />
+    <PackageReference Include="OpenIddict.AspNetCore" Version="5.2.0" />
+    <PackageReference Include="OpenIddict.Validation.AspNetCore" Version="5.2.0" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
