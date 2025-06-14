@@ -35,8 +35,8 @@ namespace BloggingApp.Infrastructure.Services
             };
         }
 
-        public async Task<Post?> GetByIdAsync(Guid id) =>
-            await _context.Posts.FirstOrDefaultAsync(p => p.Id == id.ToString() && !p.IsDeleted);
+        public async Task<Post?> GetByIdAsync(int id) =>
+            await _context.Posts.FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
 
         public async Task CreateAsync(Post post)
         {
@@ -50,7 +50,7 @@ namespace BloggingApp.Infrastructure.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(int id)
         {
             var post = await _context.Posts.FindAsync(id);
             if (post != null)

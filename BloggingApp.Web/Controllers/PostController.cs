@@ -38,7 +38,7 @@ namespace BloggingApp.Web.Controllers
 
         // GET: /Posts/Details/{id}
         [HttpGet("Details/{id}")]
-        public async Task<IActionResult> Details(Guid id)
+        public async Task<IActionResult> Details(int id)
         {
             var post = await _postService.GetByIdAsync(id);
             if (post == null)
@@ -55,7 +55,7 @@ namespace BloggingApp.Web.Controllers
         }
 
         // POST: /Posts/Create
-        [HttpPost]
+        [HttpPost("Create")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Post post)
         {
@@ -71,7 +71,7 @@ namespace BloggingApp.Web.Controllers
 
         // GET: /Posts/Edit/{id}
         [HttpGet("Edit/{id}")]
-        public async Task<IActionResult> Edit(Guid id)
+        public async Task<IActionResult> Edit(int id)
         {
             var post = await _postService.GetByIdAsync(id);
             if (post == null)
@@ -83,9 +83,9 @@ namespace BloggingApp.Web.Controllers
         // POST: /Posts/Edit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, Post post)
+        public async Task<IActionResult> Edit(int id, Post post)
         {
-            if (id.ToString() != post.Id)
+            if (id != post.Id)
                 return NotFound();
 
             if (!ModelState.IsValid)
@@ -98,7 +98,7 @@ namespace BloggingApp.Web.Controllers
 
         // GET: /Posts/Delete/{id}
         [HttpGet("Delete/{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete(int id)
         {
             var post = await _postService.GetByIdAsync(id);
             if (post == null)
@@ -110,7 +110,7 @@ namespace BloggingApp.Web.Controllers
         // POST: /Posts/Delete/{id}
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _postService.DeleteAsync(id);
             return RedirectToAction(nameof(Index));

@@ -9,9 +9,9 @@ namespace BloggingApp.Application.Interfaces
     public interface IPostService
     {
         Task<List<Post>> GetAllAsync(string? sortBy = null, string? search = null);
-        Task<Post?> GetByIdAsync(Guid id);
+        Task<Post?> GetByIdAsync(int id);
         Task CreateAsync(Post post);
         Task UpdateAsync(Post post);
-        Task DeleteAsync(Guid id);
+        Task DeleteAsync(int id);
     }
 }
