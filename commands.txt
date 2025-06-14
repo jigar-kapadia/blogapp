@@ -1,0 +1,8 @@
+Delete previeous migrations
+
+then run below commands
+
+dotnet ef migrations add InitialCreate --project BloggingApp.Persistence --startup-project BloggingApp.Web
+
+dotnet ef database update --project BloggingApp.Persistence --startup-project BloggingApp.Web
+

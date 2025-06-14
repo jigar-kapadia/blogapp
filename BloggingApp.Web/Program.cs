@@ -1,5 +1,8 @@
+using BloggingApp.Application.Interfaces;
+using BloggingApp.Infrastructure.Services;
 using BloggingApp.Persistence;
 using BloggingApp.Persistence.Entities;
+using BloggingApp.Persistence.Seed;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -81,7 +84,15 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddRazorPages();
 
+builder.Services.AddScoped<IPostService, PostService>();
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    await SeedData.Initialize(services);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -104,5 +115,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
- 
+
 app.Run();

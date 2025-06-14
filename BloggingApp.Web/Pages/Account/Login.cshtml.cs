@@ -52,7 +52,7 @@ namespace BloggingApp.Web.Pages.Account
 
             if (result.Succeeded)
             {
-                return RedirectToPage("/Index");
+                return RedirectToPage("/Home/Index");
             }
 
             ModelState.AddModelError(string.Empty, "Invalid login attempt.");

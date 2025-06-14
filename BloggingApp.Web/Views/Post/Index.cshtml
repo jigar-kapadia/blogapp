@@ -1,0 +1,44 @@
+@model List<BloggingApp.Domain.Entities.Post>
+@{
+    ViewData["Title"] = "All Posts";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create">Create New Post</a>
+</p>
+
+<form method="get">
+    <input type="text" name="search" placeholder="Search title..." />
+    <select name="sortBy">
+        <option value="">Sort By</option>
+        <option value="title">Title</option>
+        <option value="date">Date</option>
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Created At</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var post in Model)
+{
+    <tr>
+        <td>@post.Title</td>
+        <td>@post.CreatedAt.ToLocalTime().ToString("g")</td>
+        <td>
+            <a asp-action="Details" asp-route-id="@post.Id">View</a> |
+            <a asp-action="Edit" asp-route-id="@post.Id">Edit</a> |
+            <a asp-action="Delete" asp-route-id="@post.Id">Delete</a>
+        </td>
+    </tr>
+}
+    </tbody>
+</table>

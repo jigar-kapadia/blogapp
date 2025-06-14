@@ -1,0 +1,15 @@
+@model BloggingApp.Domain.Entities.Post
+
+@{
+    ViewData["Title"] = "Post Details";
+}
+
+<h2>@Model.Title</h2>
+<p><strong>Created:</strong> @Model.CreatedAt.ToLocalTime().ToString("g")</p>
+
+<div>
+    @Html.Raw(Model.Content)
+</div>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+<a asp-action="Index" class="btn btn-secondary">Back</a>
